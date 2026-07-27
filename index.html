@@ -267,12 +267,13 @@
             border: 1px solid rgba(255,255,255,0.2);
             text-align: left;
             cursor: pointer;
-            /* Slowed down 3D animation to 1.8s */
-            transition: transform 1.8s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
+            /* Smooth 3D animation settings */
+            transition: transform 0.8s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
             transform-style: preserve-3d;
         }
 
-        /* 360 Spin ONLY active when triggered by bottom button hover */
+        /* 360 Spin Left-to-Right Triggered on Hover or via Bottom Button Hover */
+        .psn-visual-card:hover,
         .psn-visual-card.spin-hover {
             transform: rotateY(360deg);
             box-shadow: 0 20px 35px rgba(0, 112, 209, 0.7);
@@ -617,7 +618,7 @@
         const topCards = document.querySelectorAll('.psn-visual-card');
         const bottomButtons = document.querySelectorAll('.card-option');
 
-        // Hovering over a bottom button triggers the corresponding top card to spin
+        // Hovering over a bottom button makes the corresponding top card spin 360 degrees
         bottomButtons.forEach((button, index) => {
             button.addEventListener('mouseenter', () => {
                 if (topCards[index]) {
