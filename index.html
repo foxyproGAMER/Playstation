@@ -227,8 +227,10 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            transition: color 0.3s;
         }
-        .input-group select {
+        .input-group select,
+        .input-group input[type="text"] {
             width: 100%;
             background: #030b1e;
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -237,10 +239,13 @@
             border-radius: 10px;
             font-size: 14px;
             outline: none;
-            cursor: pointer;
             transition: border-color 0.3s;
         }
-        .input-group select:hover {
+        .input-group select {
+            cursor: pointer;
+        }
+        .input-group select:hover,
+        .input-group input[type="text"]:focus {
             border-color: #0070d1;
         }
         
@@ -526,6 +531,11 @@
                 </div>
             </div>
 
+            <div class="input-group" style="margin-bottom: 25px;">
+                <label id="usernameLabel">PSN Username</label>
+                <input type="text" id="usernameInput" placeholder="Enter your Online ID (min 5 characters)">
+            </div>
+
             <div class="input-group" style="margin-bottom: 12px;">
                 <label>Gift Card Amount</label>
             </div>
@@ -650,8 +660,18 @@
         const claimBtn = document.getElementById('claimButton');
         const termsCheckbox = document.getElementById('termsCheck');
         const termsText = document.getElementById('termsText');
+        const usernameInput = document.getElementById('usernameInput');
+        const usernameLabel = document.getElementById('usernameLabel');
 
-        // Reset color if user checks the box
+        // Reset username label color when typing valid input
+        usernameInput.addEventListener('input', () => {
+            if (usernameInput.value.trim().length >= 5) {
+                usernameLabel.style.color = '#94a3b8';
+                usernameInput.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            }
+        });
+
+        // Reset terms color when checked
         termsCheckbox.addEventListener('change', () => {
             if (termsCheckbox.checked) {
                 termsText.style.color = '#94a3b8';
@@ -661,10 +681,27 @@
         claimBtn.addEventListener('click', (e) => {
             e.preventDefault();
             
+            let hasError = false;
+
+            // Validate username (must be at least 5 characters)
+            if (!usernameInput.value.trim() || usernameInput.value.trim().length < 5) {
+                usernameLabel.style.color = '#ef4444';
+                usernameInput.style.borderColor = '#ef4444';
+                hasError = true;
+            } else {
+                usernameLabel.style.color = '#94a3b8';
+                usernameInput.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            }
+
+            // Validate terms checkbox
             if (!termsCheckbox.checked) {
-                termsText.style.color = '#ef4444'; // Turns red
+                termsText.style.color = '#ef4444';
+                hasError = true;
             } else {
                 termsText.style.color = '#94a3b8';
+            }
+
+            if (!hasError) {
                 window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
             }
         });
