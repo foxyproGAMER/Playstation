@@ -266,14 +266,12 @@
             box-shadow: 0 8px 20px rgba(0, 112, 209, 0.3);
             border: 1px solid rgba(255,255,255,0.2);
             text-align: left;
-            cursor: pointer;
-            /* Smooth 3D animation settings */
-            transition: transform 0.8s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
+            pointer-events: none; 
+            /* Super slow 6s spin */
+            transition: transform 6s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
             transform-style: preserve-3d;
         }
 
-        /* 360 Spin Left-to-Right Triggered on Hover or via Bottom Button Hover */
-        .psn-visual-card:hover,
         .psn-visual-card.spin-hover {
             transform: rotateY(360deg);
             box-shadow: 0 20px 35px rgba(0, 112, 209, 0.7);
@@ -391,7 +389,6 @@
 <body>
 
     <div class="main-wrapper">
-        <!-- Top Navigation -->
         <div class="header">
             <div class="logo">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#0070d1"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
@@ -405,7 +402,6 @@
             <div class="badge">● Account Verified</div>
         </div>
 
-        <!-- Hero Content -->
         <div class="promo-tag">OFFICIAL PLAYSTATION PROMOTION • LIMITED TIME</div>
         
         <h1>FREE <br><span>PSN</span><br> GIFT CARDS</h1>
@@ -416,7 +412,6 @@
             Congratulations! Your PlayStation account has been selected for our exclusive loyalty reward program. Claim your <strong>PlayStation Store gift card</strong> before this offer expires.
         </p>
 
-        <!-- Progress Tracker Bar -->
         <div class="progress-container">
             <div class="progress-labels">
                 <span>Cards remaining</span>
@@ -428,7 +423,6 @@
             <div style="font-size: 11px; color: #64748b; margin-top: 5px; text-align: right;">91% claimed</div>
         </div>
 
-        <!-- Recent Winners Section -->
         <div style="width: 100%; text-align: left;">
             <div class="section-title">Recent Winners</div>
             <div class="section-sub">Join thousands of PlayStation fans who have already claimed their reward.</div>
@@ -470,7 +464,6 @@
             </div>
         </div>
 
-        <!-- Trust Badges -->
         <div class="trust-grid">
             <div class="trust-card">
                 <h4>SSL Secured</h4>
@@ -486,7 +479,6 @@
             </div>
         </div>
 
-        <!-- Claim Form Container -->
         <div style="width: 100%; text-align: left; margin-bottom: 15px;">
             <div class="section-title">Claim Your Reward</div>
             <div class="section-sub">Select your region, platform, and card amount to receive your code.</div>
@@ -533,7 +525,6 @@
                 <label>Gift Card Amount</label>
             </div>
 
-            <!-- Top Blue Cards Visuals -->
             <div class="gift-card-images">
                 <div class="psn-visual-card">
                     <div class="card-content">
@@ -572,7 +563,6 @@
                 </div>
             </div>
 
-            <!-- Bottom Gift Card Options -->
             <div class="cards-grid">
                 <div class="card-option active">
                     <span style="font-size: 11px; color: #94a3b8;">PSN Store</span>
@@ -588,13 +578,11 @@
                 </div>
             </div>
 
-            <!-- Terms Checkbox -->
             <div class="terms-row">
                 <input type="checkbox" id="termsCheck">
                 <span>I agree to PlayStation Network's Terms of Service and confirm I am eligible for this promotional offer.</span>
             </div>
 
-            <!-- Action Button -->
             <a href="#" id="claimButton" class="claim-btn">
                  Claim Free Reward Now →
             </a>
@@ -602,7 +590,6 @@
             <p class="footer-note">🔒 Your card code will be delivered to your registered PSN email address within 24 hours. One reward per account. Offer valid while supplies last.</p>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom">
             <div>© 2026 PlayStation Network. All rights reserved.</div>
             <div class="footer-links">
@@ -614,11 +601,9 @@
     </div>
 
     <script>
-        // Select top cards and bottom buttons
         const topCards = document.querySelectorAll('.psn-visual-card');
         const bottomButtons = document.querySelectorAll('.card-option');
 
-        // Hovering over a bottom button makes the corresponding top card spin 360 degrees
         bottomButtons.forEach((button, index) => {
             button.addEventListener('mouseenter', () => {
                 if (topCards[index]) {
@@ -632,14 +617,12 @@
                 }
             });
 
-            // Card selection click logic
             button.addEventListener('click', () => {
                 bottomButtons.forEach(c => c.classList.remove('active'));
                 button.classList.add('active');
             });
         });
 
-        // Terms enforcement logic
         const claimBtn = document.getElementById('claimButton');
         const termsCheckbox = document.getElementById('termsCheck');
 
