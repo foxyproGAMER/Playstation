@@ -244,7 +244,7 @@
             border-color: #0070d1;
         }
         
-        /* CSS-Based Visual Gift Cards with Hover Animations */
+        /* Gift Cards with Image Reveal Hover Effect */
         .gift-card-images {
             display: flex;
             justify-content: space-between;
@@ -268,11 +268,42 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
+        /* PS Gift Card Image revealed on hover */
+        .psn-visual-card .hover-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 2;
+        }
+
         .psn-visual-card:hover {
             transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 35px rgba(0, 112, 209, 0.6);
+            box-shadow: 0 20px 35px rgba(0, 112, 209, 0.7);
             border-color: #60a5fa;
         }
+
+        .psn-visual-card:hover .hover-image {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         .psn-visual-card::after {
             content: 'PSN';
             position: absolute;
@@ -287,7 +318,7 @@
         .card-label { font-size: 10px; color: #93c5fd; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         .ps-logo-mini { width: 24px; height: 24px; fill: white; }
 
-        /* Gift Card Option Buttons with Hover Effects */
+        /* Gift Card Option Buttons */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -518,33 +549,44 @@
                 <label>Gift Card Amount</label>
             </div>
 
-            <!-- CSS-Built Visual Gift Cards with Hover Animation -->
+            <!-- Gift Card Visuals with Image Hover Reveal -->
             <div class="gift-card-images">
                 <div class="psn-visual-card">
-                    <div>
-                        <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                    </div>
-                    <div>
-                        <div class="card-label">Gift Card</div>
-                        <div class="card-val">$100</div>
-                    </div>
-                </div>
-                <div class="psn-visual-card">
-                    <div>
-                        <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                    </div>
-                    <div>
-                        <div class="card-label">Gift Card</div>
-                        <div class="card-val">$50</div>
+                    <div class="hover-image" style="background-image: url('https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="card-content">
+                        <div>
+                            <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
+                        </div>
+                        <div>
+                            <div class="card-label">Gift Card</div>
+                            <div class="card-val">$100</div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="psn-visual-card">
-                    <div>
-                        <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
+                    <div class="hover-image" style="background-image: url('https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="card-content">
+                        <div>
+                            <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
+                        </div>
+                        <div>
+                            <div class="card-label">Gift Card</div>
+                            <div class="card-val">$50</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="card-label">Gift Card</div>
-                        <div class="card-val">$20</div>
+                </div>
+
+                <div class="psn-visual-card">
+                    <div class="hover-image" style="background-image: url('https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80');"></div>
+                    <div class="card-content">
+                        <div>
+                            <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
+                        </div>
+                        <div>
+                            <div class="card-label">Gift Card</div>
+                            <div class="card-val">$20</div>
+                        </div>
                     </div>
                 </div>
             </div>
