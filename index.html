@@ -158,6 +158,11 @@
             border-radius: 16px;
             padding: 20px;
             text-align: left;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .winner-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 112, 209, 0.4);
         }
         .stars { color: #f59e0b; font-size: 14px; margin-bottom: 10px; }
         .winner-text { font-size: 13px; color: #cbd5e1; line-height: 1.4; margin-bottom: 15px; }
@@ -232,29 +237,41 @@
             border-radius: 10px;
             font-size: 14px;
             outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .input-group select:hover {
+            border-color: #0070d1;
         }
         
-        /* CSS-Based Visual Gift Cards */
+        /* CSS-Based Visual Gift Cards with Hover Animations */
         .gift-card-images {
             display: flex;
             justify-content: space-between;
             gap: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .psn-visual-card {
             width: 100%;
             aspect-ratio: 1.58 / 1;
             background: linear-gradient(135deg, #003087 0%, #0070d1 100%);
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 112, 209, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 112, 209, 0.3);
             border: 1px solid rgba(255,255,255,0.2);
             text-align: left;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .psn-visual-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 35px rgba(0, 112, 209, 0.6);
+            border-color: #60a5fa;
         }
         .psn-visual-card::after {
             content: 'PSN';
@@ -263,14 +280,14 @@
             right: -10px;
             font-size: 60px;
             font-weight: 900;
-            color: rgba(255,255,255,0.07);
+            color: rgba(255,255,255,0.08);
             transform: rotate(-15deg);
         }
         .card-val { font-size: clamp(20px, 4vw, 28px); font-weight: 900; color: white; }
         .card-label { font-size: 10px; color: #93c5fd; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         .ps-logo-mini { width: 24px; height: 24px; fill: white; }
 
-        /* Gift Card Amount Selector Grid */
+        /* Gift Card Option Buttons with Hover Effects */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -285,12 +302,19 @@
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s ease;
         }
-        .card-option:hover, .card-option.active {
+        .card-option:hover {
+            transform: translateY(-6px) scale(1.03);
             border-color: #0070d1;
-            background: rgba(0, 112, 209, 0.15);
-            box-shadow: 0 0 15px rgba(0, 112, 209, 0.3);
+            background: rgba(0, 112, 209, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 112, 209, 0.4);
+        }
+        .card-option.active {
+            border-color: #0070d1;
+            background: rgba(0, 112, 209, 0.25);
+            box-shadow: 0 0 20px rgba(0, 112, 209, 0.5);
+            transform: scale(1.02);
         }
         .card-option h3 { font-size: 22px; color: #60a5fa; margin-top: 5px; }
 
@@ -305,7 +329,7 @@
         }
         .terms-row input { accent-color: #0070d1; width: 16px; height: 16px; cursor: pointer; }
 
-        /* Action Button */
+        /* Action Button Hover */
         .claim-btn {
             display: block;
             width: 100%;
@@ -318,13 +342,13 @@
             text-decoration: none;
             text-align: center;
             box-shadow: 0 10px 25px rgba(0, 112, 209, 0.4);
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             border: none;
         }
         .claim-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(0, 112, 209, 0.6);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 112, 209, 0.7);
         }
         .footer-note {
             margin-top: 15px;
@@ -345,7 +369,8 @@
             color: #64748b;
         }
         .footer-links { display: flex; gap: 20px; }
-        .footer-links a { color: #64748b; text-decoration: none; }
+        .footer-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: #ffffff; }
     </style>
 </head>
 <body>
@@ -493,7 +518,7 @@
                 <label>Gift Card Amount</label>
             </div>
 
-            <!-- CSS-Built Gift Card Visuals -->
+            <!-- CSS-Built Visual Gift Cards with Hover Animation -->
             <div class="gift-card-images">
                 <div class="psn-visual-card">
                     <div>
@@ -524,7 +549,7 @@
                 </div>
             </div>
 
-            <!-- Gift Card Options (100, 50, 20) -->
+            <!-- Gift Card Options -->
             <div class="cards-grid">
                 <div class="card-option active">
                     <span style="font-size: 11px; color: #94a3b8;">PSN Store</span>
