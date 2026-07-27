@@ -585,7 +585,7 @@
 
             <div class="terms-row">
                 <input type="checkbox" id="termsCheck">
-                <span>I agree to PlayStation Network's Terms of Service and confirm I am eligible for this promotional offer.</span>
+                <span id="termsText">I agree to PlayStation Network's Terms of Service and confirm I am eligible for this promotional offer.</span>
             </div>
 
             <a href="#" id="claimButton" class="claim-btn">
@@ -633,10 +633,9 @@
 
             card.addEventListener('animationend', () => {
                 card.classList.remove('spinning');
-                void card.offsetWidth; // Force reflow
+                void card.offsetWidth; 
                 isSpinning = false;
 
-                // Check if mouse is still hovering to spin again
                 if (isHovered) {
                     triggerSpin();
                 }
@@ -650,13 +649,22 @@
 
         const claimBtn = document.getElementById('claimButton');
         const termsCheckbox = document.getElementById('termsCheck');
+        const termsText = document.getElementById('termsText');
+
+        // Reset color if user checks the box
+        termsCheckbox.addEventListener('change', () => {
+            if (termsCheckbox.checked) {
+                termsText.style.color = '#94a3b8';
+            }
+        });
 
         claimBtn.addEventListener('click', (e) => {
             e.preventDefault();
             
             if (!termsCheckbox.checked) {
-                alert("You must agree to the Terms of Service to claim your reward.");
+                termsText.style.color = '#ef4444'; // Turns red
             } else {
+                termsText.style.color = '#94a3b8';
                 window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
             }
         });
