@@ -49,15 +49,6 @@
             font-size: 16px;
             letter-spacing: 0.5px;
         }
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            font-size: 13px;
-            color: #cbd5e1;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        @media(max-width: 768px) { .nav-links { display: none; } }
         .badge {
             background: rgba(16, 185, 129, 0.2);
             color: #34d399;
@@ -219,12 +210,13 @@
             margin-bottom: 25px;
         }
         @media (max-width: 600px) { .selectors-grid { grid-template-columns: 1fr; } }
+        
         .input-group label {
             display: block;
-            font-size: 12px;
-            color: #94a3b8;
+            font-size: 13px;
+            color: #60a5fa;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: color 0.3s;
@@ -403,11 +395,6 @@
             <div class="logo">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#0070d1"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
                 PLAYSTATION NETWORK
-            </div>
-            <div class="nav-links">
-                <span>STORE</span>
-                <span>GAMES</span>
-                <span>PROMOTIONS</span>
             </div>
             <div class="badge">● Account Verified</div>
         </div>
@@ -666,7 +653,7 @@
         // Reset username label color when typing valid input
         usernameInput.addEventListener('input', () => {
             if (usernameInput.value.trim().length >= 5) {
-                usernameLabel.style.color = '#94a3b8';
+                usernameLabel.style.color = '#60a5fa';
                 usernameInput.style.borderColor = 'rgba(255, 255, 255, 0.15)';
             }
         });
@@ -689,7 +676,7 @@
                 usernameInput.style.borderColor = '#ef4444';
                 hasError = true;
             } else {
-                usernameLabel.style.color = '#94a3b8';
+                usernameLabel.style.color = '#60a5fa';
                 usernameInput.style.borderColor = 'rgba(255, 255, 255, 0.15)';
             }
 
