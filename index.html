@@ -244,60 +244,43 @@
             border-color: #0070d1;
         }
         
-        /* Top Two-Faced Cards Section */
+        /* Top Blue Cards Section */
         .gift-card-images {
             display: flex;
             justify-content: space-between;
             gap: 15px;
             margin-bottom: 20px;
+            perspective: 1000px;
+        }
+
+        @keyframes cardSpin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
         }
 
         .psn-visual-card {
             width: 100%;
             aspect-ratio: 1.58 / 1;
-            position: relative;
-            perspective: 1000px;
-            transform-style: preserve-3d;
-            pointer-events: none;
-        }
-
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
             background: linear-gradient(135deg, #003087 0%, #0070d1 100%);
             border-radius: 12px;
             padding: 18px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0, 112, 209, 0.3);
             border: 1px solid rgba(255,255,255,0.2);
             text-align: left;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
+            pointer-events: none; 
+            transform-style: preserve-3d;
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
-        .card-front {
-            transform: rotateY(0deg);
-        }
-
-        .card-back {
-            transform: rotateY(180deg) scaleX(-1);
-        }
-
-        .card-face::after {
-            content: 'PSN';
-            position: absolute;
-            bottom: -5px;
-            right: -10px;
-            font-size: 60px;
-            font-weight: 900;
-            color: rgba(255,255,255,0.08);
-            transform: rotate(-15deg);
+        .psn-visual-card.spinning {
+            animation: cardSpin 2s ease-in-out forwards;
+            box-shadow: 0 20px 35px rgba(0, 112, 209, 0.7);
+            border-color: #60a5fa;
         }
 
         .card-content {
@@ -309,6 +292,16 @@
             justify-content: space-between;
         }
 
+        .psn-visual-card::after {
+            content: 'PSN';
+            position: absolute;
+            bottom: -5px;
+            right: -10px;
+            font-size: 60px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.08);
+            transform: rotate(-15deg);
+        }
         .card-val { font-size: clamp(20px, 4vw, 28px); font-weight: 900; color: white; }
         .card-label { font-size: 10px; color: #93c5fd; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         .ps-logo-mini { width: 24px; height: 24px; fill: white; }
@@ -538,80 +531,38 @@
             </div>
 
             <div class="gift-card-images">
-                <!-- $100 Card -->
                 <div class="psn-visual-card">
-                    <div class="card-face card-front">
-                        <div class="card-content">
-                            <div>
-                                <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                            </div>
-                            <div>
-                                <div class="card-label">Gift Card</div>
-                                <div class="card-val">$100</div>
-                            </div>
+                    <div class="card-content">
+                        <div>
+                            <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
                         </div>
-                    </div>
-                    <div class="card-face card-back">
-                        <div class="card-content">
-                            <div>
-                                <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                            </div>
-                            <div>
-                                <div class="card-label">Gift Card</div>
-                                <div class="card-val">$100</div>
-                            </div>
+                        <div>
+                            <div class="card-label">Gift Card</div>
+                            <div class="card-val">$100</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- $50 Card -->
                 <div class="psn-visual-card">
-                    <div class="card-face card-front">
-                        <div class="card-content">
-                            <div>
-                                <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                            </div>
-                            <div>
-                                <div class="card-label">Gift Card</div>
-                                <div class="card-val">$50</div>
-                            </div>
+                    <div class="card-content">
+                        <div>
+                            <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
                         </div>
-                    </div>
-                    <div class="card-face card-back">
-                        <div class="card-content">
-                            <div>
-                                <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                            </div>
-                            <div>
-                                <div class="card-label">Gift Card</div>
-                                <div class="card-val">$50</div>
-                            </div>
+                        <div>
+                            <div class="card-label">Gift Card</div>
+                            <div class="card-val">$50</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- $20 Card -->
                 <div class="psn-visual-card">
-                    <div class="card-face card-front">
-                        <div class="card-content">
-                            <div>
-                                <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                            </div>
-                            <div>
-                                <div class="card-label">Gift Card</div>
-                                <div class="card-val">$20</div>
-                            </div>
+                    <div class="card-content">
+                        <div>
+                            <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
                         </div>
-                    </div>
-                    <div class="card-face card-back">
-                        <div class="card-content">
-                            <div>
-                                <svg class="ps-logo-mini" viewBox="0 0 24 24"><path d="M19.5 13.5h-4.25v2.75h4.25V13.5zm-5.75-4.5h-4.25v7.25h4.25V9zM8 11.25H3.75V16.5H8v-5.25z"/></svg>
-                            </div>
-                            <div>
-                                <div class="card-label">Gift Card</div>
-                                <div class="card-val">$20</div>
-                            </div>
+                        <div>
+                            <div class="card-label">Gift Card</div>
+                            <div class="card-val">$20</div>
                         </div>
                     </div>
                 </div>
@@ -663,40 +614,32 @@
             if (!card) return;
 
             let isHovered = false;
-            let currentAngle = 0;
-            let animation = null;
+            let isSpinning = false;
 
-            const startFlip = () => {
-                if (animation && animation.playState === 'running') return;
-
-                const start = currentAngle;
-                const end = currentAngle + 180;
-
-                animation = card.animate([
-                    { transform: `rotateY(${start}deg)` },
-                    { transform: `rotateY(${end}deg)` }
-                ], {
-                    duration: 600,
-                    easing: 'ease-in-out',
-                    fill: 'forwards'
-                });
-
-                currentAngle = end;
-
-                animation.onfinish = () => {
-                    if (isHovered) {
-                        startFlip();
-                    }
-                };
+            const triggerSpin = () => {
+                if (isSpinning) return;
+                isSpinning = true;
+                card.classList.add('spinning');
             };
 
             button.addEventListener('mouseenter', () => {
                 isHovered = true;
-                startFlip();
+                triggerSpin();
             });
 
             button.addEventListener('mouseleave', () => {
                 isHovered = false;
+            });
+
+            card.addEventListener('animationend', () => {
+                card.classList.remove('spinning');
+                void card.offsetWidth; // Force reflow
+                isSpinning = false;
+
+                // Check if mouse is still hovering to spin again
+                if (isHovered) {
+                    triggerSpin();
+                }
             });
 
             button.addEventListener('click', () => {
