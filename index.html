@@ -252,6 +252,12 @@
             margin-bottom: 20px;
             perspective: 1000px;
         }
+
+        @keyframes cardSpin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
         .psn-visual-card {
             width: 100%;
             aspect-ratio: 1.58 / 1;
@@ -267,13 +273,12 @@
             border: 1px solid rgba(255,255,255,0.2);
             text-align: left;
             pointer-events: none; 
-            /* Super slow 6s spin */
-            transition: transform 2s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
             transform-style: preserve-3d;
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
         }
 
-        .psn-visual-card.spin-hover {
-            transform: rotateY(360deg);
+        .psn-visual-card.spinning {
+            animation: cardSpin 2s ease-in-out forwards;
             box-shadow: 0 20px 35px rgba(0, 112, 209, 0.7);
             border-color: #60a5fa;
         }
@@ -605,15 +610,35 @@
         const bottomButtons = document.querySelectorAll('.card-option');
 
         bottomButtons.forEach((button, index) => {
+            const card = topCards[index];
+            if (!card) return;
+
+            let isHovered = false;
+            let isSpinning = false;
+
+            const triggerSpin = () => {
+                if (isSpinning) return;
+                isSpinning = true;
+                card.classList.add('spinning');
+            };
+
             button.addEventListener('mouseenter', () => {
-                if (topCards[index]) {
-                    topCards[index].classList.add('spin-hover');
-                }
+                isHovered = true;
+                triggerSpin();
             });
 
             button.addEventListener('mouseleave', () => {
-                if (topCards[index]) {
-                    topCards[index].classList.remove('spin-hover');
+                isHovered = false;
+            });
+
+            card.addEventListener('animationend', () => {
+                card.classList.remove('spinning');
+                void card.offsetWidth; // Force reflow
+                isSpinning = false;
+
+                // Check if mouse is still hovering to spin again
+                if (isHovered) {
+                    triggerSpin();
                 }
             });
 
