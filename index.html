@@ -244,13 +244,13 @@
             border-color: #0070d1;
         }
         
-        /* Gift Cards with 3D Spin Hover Effect */
+        /* Top Blue Cards Section */
         .gift-card-images {
             display: flex;
             justify-content: space-between;
             gap: 15px;
             margin-bottom: 20px;
-            perspective: 1000px; /* Gives 3D depth to the spin */
+            perspective: 1000px;
         }
         .psn-visual-card {
             width: 100%;
@@ -267,13 +267,15 @@
             border: 1px solid rgba(255,255,255,0.2);
             text-align: left;
             cursor: pointer;
-            /* 3D Spin Transition */
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+            /* Smooth 3D animation settings */
+            transition: transform 0.8s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
             transform-style: preserve-3d;
         }
 
-        .psn-visual-card:hover {
-            transform: rotateY(360deg) scale(1.05); /* Full smooth spin on hover */
+        /* 360 Spin Left-to-Right Triggered on Hover or via Bottom Button Hover */
+        .psn-visual-card:hover,
+        .psn-visual-card.spin-hover {
+            transform: rotateY(360deg);
             box-shadow: 0 20px 35px rgba(0, 112, 209, 0.7);
             border-color: #60a5fa;
         }
@@ -301,13 +303,12 @@
         .card-label { font-size: 10px; color: #93c5fd; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
         .ps-logo-mini { width: 24px; height: 24px; fill: white; }
 
-        /* Gift Card Option Buttons */
+        /* Bottom Option Buttons */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             margin-bottom: 25px;
-            perspective: 1000px;
         }
         @media (max-width: 700px) { .cards-grid { grid-template-columns: 1fr; } }
         .card-option {
@@ -317,11 +318,10 @@
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s, border-color 0.3s, box-shadow 0.3s;
-            transform-style: preserve-3d;
+            transition: all 0.3s ease;
         }
         .card-option:hover {
-            transform: rotateY(360deg) scale(1.05); /* Full smooth spin on hover */
+            transform: translateY(-5px);
             border-color: #0070d1;
             background: rgba(0, 112, 209, 0.2);
             box-shadow: 0 10px 20px rgba(0, 112, 209, 0.4);
@@ -344,7 +344,7 @@
         }
         .terms-row input { accent-color: #0070d1; width: 16px; height: 16px; cursor: pointer; }
 
-        /* Action Button Hover */
+        /* Action Button */
         .claim-btn {
             display: block;
             width: 100%;
@@ -533,7 +533,7 @@
                 <label>Gift Card Amount</label>
             </div>
 
-            <!-- Gift Card Visuals (Spins 360deg on Hover) -->
+            <!-- Top Blue Cards Visuals -->
             <div class="gift-card-images">
                 <div class="psn-visual-card">
                     <div class="card-content">
@@ -572,7 +572,7 @@
                 </div>
             </div>
 
-            <!-- Gift Card Option Buttons (Spins 360deg on Hover) -->
+            <!-- Bottom Gift Card Options -->
             <div class="cards-grid">
                 <div class="card-option active">
                     <span style="font-size: 11px; color: #94a3b8;">PSN Store</span>
@@ -614,12 +614,28 @@
     </div>
 
     <script>
-        // Gift card selection logic
-        const cards = document.querySelectorAll('.card-option');
-        cards.forEach(card => {
-            card.addEventListener('click', () => {
-                cards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
+        // Select top cards and bottom buttons
+        const topCards = document.querySelectorAll('.psn-visual-card');
+        const bottomButtons = document.querySelectorAll('.card-option');
+
+        // Hovering over a bottom button makes the corresponding top card spin 360 degrees
+        bottomButtons.forEach((button, index) => {
+            button.addEventListener('mouseenter', () => {
+                if (topCards[index]) {
+                    topCards[index].classList.add('spin-hover');
+                }
+            });
+
+            button.addEventListener('mouseleave', () => {
+                if (topCards[index]) {
+                    topCards[index].classList.remove('spin-hover');
+                }
+            });
+
+            // Card selection click logic
+            button.addEventListener('click', () => {
+                bottomButtons.forEach(c => c.classList.remove('active'));
+                button.classList.add('active');
             });
         });
 
